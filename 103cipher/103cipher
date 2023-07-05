@@ -1,0 +1,130 @@
+#!/usr/bin/python3.9
+
+from sys import exit, argv, stderr
+from math import sqrt, ceil, floor
+from typing import Union
+Matrix = list[list[Union[float, int]]]
+
+def my_exit(err: str, code: int):
+    print(err, file=stderr)
+    exit(code)
+
+def help(void) -> None:
+    print("USAGE")
+    print("\t./103cipher message key flag")
+    print("DESCRIPTION")
+    print("")
+    print("\tmessage\ta message, made of ASCII characters")
+    print("\tkey\tthe encryption key, made of ASCII characters")
+    print("\tflag\t0 for the message to be encrypted, 1 to be decrypted")
+    exit(0)
+
+
+def ori(val: Union[str, int], key: bool = False) -> int:
+    if (argv[3] == "0" or key):
+        return ord(val[0])
+    if (argv[3] == "1"):
+        return int(val)
+
+
+def minor_matrix(matrice: Matrix, i: int, j: int) -> Matrix:
+    return [row[:j] + row[j+1:] for row in (matrice[:i]+matrice[i+1:])]
+
+
+def dert_matrix(matrice: Matrix) -> int:
+    dert: int = 0
+    if len(matrice) == 2:
+        dert = matrice[0][0]*matrice[1][1]-matrice[0][1]*matrice[1][0]
+        return dert
+    for c in range(len(matrice)):
+        dert += ((-1)**c)*matrice[0][c] * \
+            dert_matrix(minor_matrix(matrice, 0, c))
+    return dert
+
+
+def inverse_matrix(matrice: Matrix) -> Matrix:
+    dert: int = dert_matrix(matrice)
+    if (dert == 0): my_exit("divide by zero", 84)
+    minor: Matrix
+    cofact: Matrix
+    cofactr: Matrix
+
+    if len(matrice) == 2:
+        return [[matrice[1][1]/dert, -1*matrice[0][1]/dert],
+                [-1*matrice[1][0]/dert, matrice[0][0]/dert]]
+    cofact = []
+    for r in range(len(matrice)):
+        cofactr = []
+        for c in range(len(matrice)):
+            minor = minor_matrix(matrice, r, c)
+            cofactr.append(((-1)**(r+c)) * dert_matrix(minor))
+        cofact.append(cofactr)
+    cofact = list(map(list, zip(*cofact)))
+    for r in range(len(cofact)):
+        for c in range(len(cofact)):
+            cofact[r][c] = cofact[r][c]/dert
+            cofact[r][c] = 0 if cofact[r][c] == 0 else cofact[r][c]
+    return cofact
+
+
+def matrix_multiply(A: Matrix, B: Matrix) -> Matrix:
+    return [[sum([x*y[j] for (x, y) in zip(a, B)]) for j in range(len(B[0]))] for a in A]
+
+
+def text_to_matrix(text: Union[str, list[str]], size: int, key: bool = False) -> Matrix:
+    ma_key: Matrix = [[0 for x in range(size)] for y in range(size)]
+    for i in range(len(text)):
+        ma_key[i//size][i % size] = ori(text[i], key)
+    return ma_key
+
+
+def generate_matrix(text: str, size: int, key: bool = False) -> Matrix:
+    as_key: list[int] = list(map(lambda x: ori(x, key), text))
+    return text_to_matrix(text, size, key)
+
+
+def cipher(ac: int, av: list[str]) -> None:
+    size: int = ceil(sqrt(len(av[2])))
+    ma_key: Matrix = generate_matrix(av[2], size, key=True)
+    encrypted: list[int] = list()
+    txt_mat: Matrix
+
+    for i in range(0, len(av[1]), size**2):
+        txt_mat = generate_matrix(av[1][i:i+size**2], size)
+        encrypted.extend(sum(matrix_multiply(txt_mat, ma_key), []))
+    print("Key matrix:")
+    print('\n'.join(['\t'.join(map(str, lkey)) for lkey in ma_key]))
+    print("\nEncrypted message:")
+    print(' '.join(map(str, filter(lambda x: x != 0, encrypted))))
+
+
+def decipher(ac: int, av: list[str]) -> None:
+    size: int = ceil(sqrt(len(av[2])))
+    ma_key: Matrix = inverse_matrix(generate_matrix(av[2], size, key=True))
+    encrypted: list[int] = list()
+    txt_mat: Matrix
+
+    av[1] = av[1].split(" ")
+    for i in range(0, len(av[1]), size**2):
+        txt_mat = generate_matrix(av[1][i:i+size**2], size)
+        encrypted.extend(sum(matrix_multiply(txt_mat, ma_key), []))
+    encrypted = list(map(lambda x: abs(round(x)),
+                     filter(lambda x: x != 0, encrypted)))
+    print("Key matrix:")
+    print('\n'.join(['\t'.join(map(lambda x: str(float(round(x, 3))), lkey))
+          for lkey in ma_key]))
+    print("\nDecrypted message:")
+    print(''.join(map(chr, encrypted)))
+
+
+if (__name__ == '__main__'):
+    argc: int = len(argv)
+    if (argc == 2 and argv[1] == "-h"):
+        help()
+    elif (argc == 4 and argv[3] == "0"):
+        cipher(argc, argv)
+    elif (argc == 4 and argv[3] == "1"):
+        decipher(argc, argv)
+    else:
+        my_exit("to many arguments", 84)
+    exit(0)

@@ -1,0 +1,11 @@
+Artifact of death
+Drastically increases the
+difficulty of the game! The skills
+of each enemy increases:
+
+Damage -> x5
+Health -> x5
+Speed -> *1.2
+
+(Therefore... The reward for each
+enemy is proportional)

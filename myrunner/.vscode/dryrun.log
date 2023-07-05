@@ -1,0 +1,26 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/maxim/test/test'
+gcc -W -Wall -Wextra -Werror -g3 -Iinclude/  -c -o src/destroy.o src/destroy.c
+gcc -W -Wall -Wextra -Werror -g3 -Iinclude/  -c -o src/help.o src/help.c
+gcc -W -Wall -Wextra -Werror -g3 -Iinclude/  -c -o src/init_all.o src/init_all.c
+gcc -W -Wall -Wextra -Werror -g3 -Iinclude/  -c -o src/main.o src/main.c
+gcc -W -Wall -Wextra -Werror -g3 -Iinclude/  -c -o src/maps.o src/maps.c
+gcc -W -Wall -Wextra -Werror -g3 -Iinclude/  -c -o src/player_1.o src/player_1.c
+gcc -W -Wall -Wextra -Werror -g3 -Iinclude/  -c -o src/player_2.o src/player_2.c
+gcc -W -Wall -Wextra -Werror -g3 -Iinclude/  -c -o src/wallpaper.o src/wallpaper.c
+echo "\033[1;99mCréation de la lib... [my_runner]\033[0m"
+echo "\033[34m"
+make -C ./lib/my/
+echo "\033[1;93mLa création de la lib terminé !\n\033[0m"
+echo "\033[1;99mCréation du binaire... [my_runner]\033[0m"
+echo "\033[34m"
+gcc -o my_runner ./src/destroy.o ./src/help.o ./src/init_all.o ./src/main.o ./src/maps.o ./src/player_1.o ./src/player_2.o ./src/wallpaper.o -lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio -L ./lib/ -lmy -lm
+echo "\033[1;93mLa création de l'éxécutable est terminé !\n\033[0m"
+echo "\033[1;95mCréation du dossier...\033[0m"
+echo "\033[34m"
+mkdir -p compil_des_o
+echo "\033[1;96mDossier {compil_des_o} créé !\n\033[0m"
+mv -f ./src/*.o compil_des_o
+echo "\033[1;94mMooving des .o dans compil_des_o: OK !\n\033[0m"
+make: Leaving directory '/home/maxim/test/test'
+ 

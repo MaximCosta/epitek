@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/monokai-sublime.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js/dist/highlightjs-line-numbers.min.js">
+    </script>
+    <script src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <template id="tmp_windows">
+        <div class="windows_header">
+            <div class="windows_title">Title</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14">
+                <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
+                    <circle cx="6" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5" class="_minus">
+                    </circle>
+                    <circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5" class="_full">
+                    </circle>
+                    <circle cx="46" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5" class="_close">
+                    </circle>
+                </g>
+            </svg>
+        </div>
+        <div class="windowse_container">
+            <iframe src="/games/lsd/index.html" class="windows_iframe" onload="resizeIframe(this)"></iframe>
+        </div>
+    </template>
+</head>
+
+<body>
+    <div id="appbar" class="appbar">
+    </div>
+    <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14">
+            <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
+                <circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle>
+                <circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle>
+                <circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle>
+            </g>
+        </svg>
+    </div>
+    <div id="bottoms">
+        <pre id="prompts">
+            <span id="command" contenteditable="true" class="single-line" autofocus></span>
+        </pre>
+    </div>
+    <div id="dock_bar" class="dock_bar">
+    </div>
+    <script src="/assets/js/drag.js"></script>
+    <script src="/assets/js/script.js"></script>
+    <script src="/assets/js/event.js"></script>
+</body>
+
+</html>

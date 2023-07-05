@@ -1,0 +1,81 @@
+#!/usr/bin/env Rscript
+
+library(crayon)
+
+execute_cmd <- function(cmd, value_exit)
+{
+    try(system(cmd))
+}   
+
+cd_flag <- function(cmd)
+{
+    if (cmd == "cd") {
+        setwd("/home/")
+        return ()
+    }
+    value_after_cd <- strsplit(cmd, split = " ")[[1]][2]
+    if (value_after_cd == "..") {
+        setwd("..")
+        return ()
+    }
+    else if (value_after_cd == "~") {
+        setwd("/home/")
+        return ()
+    }
+    try(setwd(value_after_cd))
+}
+
+print_stat <- function(history)
+{
+    cat("\n")
+    cat(bgCyan("-------------------"))
+    cat("\n")
+    cat(bgCyan("|", bgRed("HISTORY | STATS"), "|"))
+    cat("\n")
+    cat(bgCyan("-------------------"))
+    cat("\n")
+}
+
+parse_string <- function(string)
+{
+    split_string <- strsplit(string, split = " ")
+    if (length(split_string) == 1) {
+        return(split_string[[1]])
+    }
+    else {
+        return(split_string[[1]], split_string[[2]])
+    }
+}
+
+main <- function()  
+{
+    value_exit = 0
+    history <- list()
+    while (TRUE) {
+        cat(blue(underline(getwd(), ":")))
+        cat(" ")
+        i <- readLines(file("stdin"), n = 1L)
+        history <- append(history, i)
+        if (i == "exit")
+            break
+        if (i == "history") {
+            for (j in 1:length(history)) {
+                cat(green(italic(j, ":")), yellow(bold(history[[j]])), "\n")
+            }
+            next
+        }
+        if (startsWith(i, "cd")) {
+            cd_flag(i)
+            next
+        }
+        if (i == "echo $?") {
+            cat(red(value_exit), "\n")
+            next
+        }
+        value_exit <- execute_cmd(i, value_exit)
+    }
+    cat("Exit\n")
+    print_stat(history)
+}
+
+main()

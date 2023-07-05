@@ -1,0 +1,8 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/maxim/code/epitech_project/delivery/BSQ'
+make -C ./lib/my
+gcc -c bsq.c bsq_work.c
+gcc -c bsq.c bsq_work.c
+gcc -o bsq bsq.o bsq_work.o -I./include -L./lib/ -lmy
+make: Leaving directory '/home/maxim/code/epitech_project/delivery/BSQ'
+ 

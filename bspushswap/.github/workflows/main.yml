@@ -1,0 +1,29 @@
+name: C execute file || Docker mouli bub
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    Unitest:
+        runs-on: ubuntu-latest
+        container:
+            image: epitechcontent/epitest-docker
+        steps:
+            - uses: actions/checkout@v2
+            - name: install criterion
+              run: sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/MaximCosta/sh_docker_github/main/install_criterion.sh)"
+            - name: build               || Docker mouli
+              run: make
+    codingstyle:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: installing pycparser
+              run: python -m pip install pycparser
+            - name: installing coding style
+              run: sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/aureliancnx/Bubulle-Norminette/master/install_bubulle.sh)"
+            - name: check coding style
+              run: bubulle

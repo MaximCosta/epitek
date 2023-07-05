@@ -1,0 +1,109 @@
+#!/usr/bin/python3.9
+
+from math import pi, cos, sin
+from sys import argv, exit
+
+
+def h() -> None:
+    print("""USAGE
+    ./102architect x y transfo1 arg11 [arg12] [transfo2 arg12 [arg22]] ...
+
+DESCRIPTION
+    x   abscissa of the original point
+    y   ordinate of the original point
+
+    transfo arg1 [arg2]
+    -t i j  translation along vector (i, j)
+    -z m n  scaling by factors m (x-axis) and n (y-axis)
+    -r d    rotation centered in O by a d degree angle
+    -s d    reflection over the axis passing through O with an inclination
+            angle of d degrees""")
+    exit(0)
+
+
+def t(v1: float, v2: float, A: list[float]) -> None:
+    print(f"Translation along vector ({int(v1)}, {int(v2)})")
+    B: list[float] = [[0, 0, v1], [0, 0, v2], [0, 0, 0]]
+    return [[A[i1][i2]+B[i1][i2] for i2 in range(3)] for i1 in range(3)]
+
+
+def z(v1: float, v2: float, A: list[float]) -> None:
+    print(f"Scaling by factors {int(v1)} and {int(v2)}")
+    B: list[float] = [[v1, 0, 0], [0, v2, 0], [0, 0, 1]]
+    return [[sum([x*y[j] for (x, y) in zip(a, A)]) for j in range(3)] for a in B]
+
+
+def r(a: float, A: list[float]) -> None:
+    print(f"Rotation by a {int(a)} degree angle")
+    a = (a*pi) / 180
+    B: list[float] = [[cos(a), -sin(a), 0], [sin(a), cos(a), 0], [0, 0, 1]]
+    return [[sum([x*y[j] for (x, y) in zip(a, A)]) for j in range(3)] for a in B]
+
+
+def s(a: float, A: list[float]) -> None:
+    print("Reflection over an axis with an", end=" ")
+    print(f"inclination angle of {int(a)} degrees")
+    a = 2 * ((a*pi) / 180)
+    B: list[float] = [[cos(a), sin(a), 0], [sin(a), -cos(a), 0], [0, 0, 1]]
+    return [[sum([x*y[j] for (x, y) in zip(a, A)]) for j in range(3)] for a in B]
+
+
+def vfloat(nbr: str) -> float:
+    try:
+        nbr: float = float(nbr)
+        return nbr
+    except ValueError:
+        exit(84)
+
+
+def main() -> None:
+    if (len(argv) == 1):
+        exit(84)
+    if (len(argv) > 1 and argv[1] == "-h"):
+        h()
+    try:
+        x: int = int(argv[1])
+        y: int = int(argv[2])
+    except (IndexError, ValueError):
+        exit(84)
+    matrice: list[float] = [
+        [1.00, 0.00, 0.00],
+        [0.00, 1.00, 0.00],
+        [0.00, 0.00, 1.00]
+    ]
+
+    check: int = argv.count("-t") * 3
+    check += argv.count("-z") * 3
+    check += argv.count("-r") * 2
+    check += argv.count("-s") * 2 + 3
+    if (len(argv) != check):
+        exit(84)
+
+    i: int = 3
+    while (i < len(argv)):
+        if argv[i] == "-t":
+            matrice = t(vfloat(argv[i + 1]), vfloat(argv[i + 2]), matrice)
+            i += 3
+        elif argv[i] == "-z":
+            matrice = z(vfloat(argv[i + 1]), vfloat(argv[i + 2]), matrice)
+            i += 3
+        elif argv[i] == "-r":
+            matrice = r(vfloat(argv[i + 1]), matrice)
+            i += 2
+        elif argv[i] == "-s":
+            matrice = s(vfloat(argv[i + 1]), matrice)
+            i += 2
+        else:
+            exit(84)
+
+    a1: float = matrice[0][0] * x + matrice[0][1] * y + matrice[0][2]
+    a2: float = matrice[1][0] * x + matrice[1][1] * y + matrice[1][2]
+    matrice = [[float(0.00) if x == 0 else x for x in y] for y in matrice]
+    print(f"{matrice[0][0]:.2f}\t{matrice[0][1]:.2f}\t{matrice[0][2]:.2f}")
+    print(f"{matrice[1][0]:.2f}\t{matrice[1][1]:.2f}\t{matrice[1][2]:.2f}")
+    print(f"{matrice[2][0]:.2f}\t{matrice[2][1]:.2f}\t{matrice[2][2]:.2f}")
+    print(f"({x}.00, {y}.00) => ({a1:.2f}, {a2:.2f})")
+
+
+if __name__ == "__main__":
+    main()

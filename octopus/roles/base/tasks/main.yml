@@ -1,0 +1,26 @@
+- name: Update and upgrade all packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400
+
+- name: Install package
+  apt:
+    name:
+      - git
+      - libpq-dev
+      - software-properties-common
+      - apt-transport-https
+      - ca-certificates
+      - python3
+      - python3-pip
+      - python3-setuptools
+      - python3-psycopg2
+      - ufw
+    state: present
+    update_cache: yes
+
+- name: Set timezone to Europe/Paris
+  timezone:
+    name: Europe/Paris

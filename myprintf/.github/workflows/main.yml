@@ -1,0 +1,23 @@
+name: C execute file || Docker mouli
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    testbox:
+        runs-on: ubuntu-latest
+        container:
+            image: epitechcontent/epitest-docker
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-python@v2
+              with:
+                python-version: '3.x'
+                architecture: 'x64'
+            - name: build               || Docker mouli
+              run: make
+            - name: execute             || Docker mouli
+              run: python3 test/main.py

@@ -1,0 +1,48 @@
+- name: Install redis
+  become: true
+  apt:
+    name: redis-server
+    state: latest
+    update_cache: yes
+  register: redis_install
+
+- name: Create Redis data directory
+  become: true
+  register: dir_redis
+  file:
+    path: "/var/lib/redis"
+    state: directory
+
+- name: Configure Redis
+  become: true
+  register: conf_redis
+  template:
+    src: ../files/redis.conf
+    dest: /etc/redis/redis.conf
+
+- name: Enable redis service
+  become: true
+  systemd:
+    name: redis-server
+    enabled: yes
+
+- name: Start redis service
+  become: true
+  systemd:
+    name: redis-server
+    state: started
+    enabled: yes
+
+- name: Restart Redis
+  become: true
+  when: conf_redis.changed
+  systemd:
+    name: redis-server
+    state: restarted
+
+- name: ufw rules
+  become: true
+  community.general.ufw:
+    rule: "allow"
+    port: "{{ redis_port }}"
+    proto: "tcp"

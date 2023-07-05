@@ -1,0 +1,37 @@
+{
+    "epilinter.tokenizer_address": "ws://54.36.183.139:8081",
+    "workbench.colorCustomizations": {
+        "editor.lineHighlightBackground": "#1073cf2d",
+        "editor.lineHighlightBorder": "#9fced11f",
+        "minimap.background": "#00000000",
+        "scrollbar.shadow": "#00000000"
+    },
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "*.js": "javascript",
+        "*.php": "php",
+        "server.h": "c",
+        "structs.h": "c",
+        "libs.h": "c",
+        "prototype.h": "c",
+        "define.h": "c",
+        "handle_select.C": "cpp",
+        "compare": "c",
+        "*.tcc": "c",
+        "string": "c",
+        "string_view": "c",
+        "typeinfo": "c",
+        "array": "c"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/maxim/epitek/zappy/sources/server",
+            "binaryPath": "/home/maxim/epitek/zappy/sources/server/zappy_server",
+            "binaryArgs": []
+        }
+    ]
+}

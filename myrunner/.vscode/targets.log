@@ -1,0 +1,332 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'src/destroy.o', needed by 'my_runner'.  Stop.
+ 
+# GNU Make 4.3
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Sat Jan  8 15:11:05 2022
+
+# Variables
+
+# makefile (from 'Makefile', line 24)
+OBJ = $(SRC:.c=.o)
+# environment
+LC_ALL = C
+# makefile (from 'Makefile', line 22)
+SRC = $(wildcard ./src/*.c)
+# makefile (from 'Makefile', line 10)
+AR = ar src
+# environment
+VSCODE_INJECT_NODE_MODULE_LOOKUP_PATH = /home/maxim/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/remote/node_modules
+# environment
+VSCODE_CWD = /home/maxim
+# default
+MAKE_COMMAND := make
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# environment
+PWD = /home/maxim/test/test
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+XDG_DATA_DIRS = /home/maxim/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+VSCODE_LOG_STACK = false
+# automatic
+%F = $(notdir $%)
+# environment
+LANG = C
+# default
+.LOADED := 
+# default
+.INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# makefile
+CURDIR := /home/maxim/test/test
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+LESSOPEN = | /usr/bin/lesspipe %s
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MFLAGS = -pqrR
+# default
+.SHELLFLAGS := -c
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+XDG_SESSION_TYPE = tty
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+*F = $(notdir $*)
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# makefile (from 'Makefile', line 18)
+LIB = -L ./lib/ -lmy -lm
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"9fdd4736c50ab5d00bf618b3d10bedcc.fr","_translationsConfigFile":"/home/maxim/.vscode-server/data/clp/9fdd4736c50ab5d00bf618b3d10bedcc.fr/tcf.json","_cacheRoot":"/home/maxim/.vscode-server/data/clp/9fdd4736c50ab5d00bf618b3d10bedcc.fr","_resolvedLanguagePackCoreLocation":"/home/maxim/.vscode-server/data/clp/9fdd4736c50ab5d00bf618b3d10bedcc.fr/899d46d82c4c95423fb7e10e68eba52050e30ba3","_corruptedFile":"/home/maxim/.vscode-server/data/clp/9fdd4736c50ab5d00bf618b3d10bedcc.fr/corrupted.info","_languagePackSupport":true}
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# makefile
+SHELL = /bin/sh
+# default
+MAKECMDGOALS := all
+# environment
+XMODIFIERS = @im=ibus
+# environment
+SHLVL = 0
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = /home/maxim/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/bin:/home/maxim/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+# default
+MAKEFILES := 
+# environment
+MOTD_SHOWN = pam
+# automatic
+^F = $(notdir $^)
+# environment
+SSH_CLIENT = 192.168.177.1 2341 22
+# environment
+VSCODE_LOG_NATIVE = false
+# environment
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# automatic
+?F = $(notdir $?)
+# environment
+GTK_IM_MODULE = ibus
+# environment
+LS_COLORS = 
+# automatic
++F = $(notdir $+)
+# makefile (from 'Makefile', line 12)
+DOSSIER = compil_des_o
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+BROWSER = /home/maxim/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/bin/helpers/browser.sh
+# environment
+LOGNAME = maxim
+# makefile (from 'Makefile', line 16)
+CPPFLAGS = -Iinclude/
+# makefile
+.DEFAULT_GOAL := all
+# environment
+USER = maxim
+# default
+MAKE_VERSION := 4.3
+# makefile (from 'Makefile', line 20)
+LDFLAGS = -lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio
+# environment
+VSCODE_EXTHOST_WILL_SEND_SOCKET = true
+# environment
+VSCODE_AGENT_FOLDER = /home/maxim/.vscode-server
+# environment
+_ = /home/maxim/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/node
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# makefile (from 'Makefile', line 14)
+CFLAGS = -W -Wall -Wextra -Werror -g3
+# environment
+VSCODE_IPC_HOOK_CLI = /run/user/1000/vscode-ipc-18255bce-3dee-4bd3-b36d-94f2929c0b8a.sock
+# environment
+XDG_SESSION_CLASS = user
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/server/remoteExtensionHostProcess
+# environment
+HOME = /home/maxim
+# environment
+QT_IM_MODULE = ibus
+# environment
+XDG_SESSION_ID = 4
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# default
+SUFFIXES := 
+# makefile (from 'Makefile', line 26)
+TARGET = my_runner
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# makefile (from 'Makefile', line 8)
+CC = gcc
+# environment
+SSH_CONNECTION = 192.168.177.1 2341 192.168.177.128 22
+# variable set hash-table stats:
+# Load=83/1024=8%, Rehash=0, Collisions=6/119=5%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 66307, inode 4194521): 13 files, no impossibilities.
+# ./src (device 66307, inode 4194522): 10 files, no impossibilities.
+
+# 23 files, no impossibilities in 2 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+# Not a target:
+src/wallpaper.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/help.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-01-05 12:08:25.845672317
+#  File has been updated.
+#  Successfully updated.
+
+.SILENT: src/destroy.o src/help.o src/init_all.o src/main.o src/maps.o src/player_1.o src/player_2.o src/wallpaper.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/maps.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+re: fclean all
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/player_1.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+my_runner: src/destroy.o src/help.o src/init_all.o src/main.o src/maps.o src/player_1.o src/player_2.o src/wallpaper.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-01-08 14:16:23.988437843
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 33):
+	@echo "\033[1;99mCréation de la lib... [$(@)]\033[0m"
+	@echo "\033[34m"
+	@make -C ./lib/my/
+	@echo "\033[1;93mLa création de la lib terminé !\n\033[0m"
+	@echo "\033[1;99mCréation du binaire... [$(@)]\033[0m"
+	@echo "\033[34m"
+	@$(CC) -o $(@) $(OBJ) $(LDFLAGS) $(LIB)
+	@echo "\033[1;93mLa création de l'éxécutable est terminé !\n\033[0m"
+	@echo "\033[1;95mCréation du dossier...\033[0m"
+	@echo "\033[34m"
+	@mkdir -p $(DOSSIER)
+	@echo "\033[1;96mDossier {$(DOSSIER)} créé !\n\033[0m"
+	@mv -f ./src/*.o $(DOSSIER)
+	@echo "\033[1;94mMooving des .o dans $(DOSSIER): OK !\n\033[0m"
+
+# Not a target:
+src/main.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: my_runner
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+fclean:
+#  Implicit rule search has not been done.
+ 
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 49):
+	clear
+	@echo "\033[1;90mSupression de la lib\033[0m"
+	@echo "\033[34m"
+	@make -C ./lib/my/ fclean
+	@echo "\033[1;90mSupression de $(TARGET)\033[0m"
+	@echo "\033[34m"
+	@$(RM) $(TARGET)
+	@echo "OK\n\033[0m"
+	@echo "\033[1;91mSupression du dossier {compil_des_o}\n\033[0m"
+	@rm -rf $(DOSSIER)
+	@echo "\033[36mDONE\n\033[0m"
+
+# Not a target:
+src/player_2.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/destroy.o:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+src/init_all.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=16/1024=2%, Rehash=0, Collisions=0/47=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 38 / storage = 371 B / avg = 9 B
+# current buf: size = 8162 B / used = 371 B / count = 38 / avg = 9 B
+
+# strcache performance: lookups = 62 / hit rate = 38%
+# hash-table stats:
+# Load=38/8192=0%, Rehash=0, Collisions=0/62=0%
+# Finished Make data base on Sat Jan  8 15:11:05 2022
+
+ 

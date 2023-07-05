@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.js": "javascriptreact",
+        "to_number.C": "cpp"
+    }
+}

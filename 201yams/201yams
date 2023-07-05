@@ -1,0 +1,122 @@
+#!/usr/bin/python3
+from sys import argv, exit, stderr
+from math import factorial
+
+def man_help() -> None:
+    print("USAGE")
+    print("\t./201yams d1 d2 d3 d4 d5 c\n")
+    print("DESCRIPTION")
+    print("\td1\tvalue of the first die (0 if not thrown)")
+    print("\td2\tvalue of the second die (0 if not thrown)")
+    print("\td3\tvalue of the third die (0 if not thrown)")
+    print("\td4\tvalue of the fourth die (0 if not thrown)")
+    print("\td5\tvalue of the fifth die (0 if not thrown)")
+    print("\tc\texpected combination")
+    exit(0)
+
+
+def gnb(char: str, mode: int = 0) -> int:
+    try:
+        nbr = int(char)
+    except:
+        raise Exception("Error :(\n")
+    if mode == 1:
+        if nbr > 6 or nbr <= 0:
+            raise Exception("Error :(\n")
+    if nbr > 6 or nbr < 0:
+        raise Exception("Error :(\n")
+    return nbr
+
+
+def gbinomial(a: int, b: int) -> float:
+    try:
+        result = (factorial(a) / (factorial(b) * factorial(a - b))) * pow((1 / 6), b) * pow((5 / 6), (a - b))
+    except:
+        raise Exception("Error :(\n")
+    return result
+
+
+def gnb_apparition(nb: int, *args: list[int]) -> int:
+    return args.count(nb)
+
+
+def gresult(dice: int, number: int, *args: list[int]) -> float:
+    result: float = 0.0
+    apparition: int = gnb_apparition(number, *args)
+    if dice < apparition:
+        result = 1
+    else:
+        for n in range(dice - apparition, 6 - apparition):
+            result += gbinomial(5 - apparition, n)
+    return result * 100
+
+
+def gstraight(number: int, *args: list[int]) -> float:
+    tab = set()
+    tab.update(args)
+    if len(tab) == 1:
+        tab.add(0)
+    pres = 5 if tab.issuperset([number]) else 6
+    return factorial(pres - int(len(tab))) / pow(6, pres - int(len(tab))) * 100
+
+
+def gfull(n1: int, n2: int, *args: list[int]) -> float:
+    result: float = 1.0
+    count1: int = min(3, gnb_apparition(n1, *args))
+    count2: int = min(2, gnb_apparition(n2, *args))
+    for n in range(5 - count1 - count2, 6 - count1 - count2):
+        result *= gbinomial(5 - count1 - count2, n)
+    return min(0.1, result) * 1000
+
+
+def compute_result(string: str, *args: list[int]) -> None:
+    arg: list[str] = string.split("_")
+    cbn: str = arg[0]
+    result: float = 0.0
+    if len(arg) == 2:
+        nb: int = gnb(arg[1], 1)
+        print("Chances to get a " + str(nb) + " " + cbn, end="")
+        match cbn:
+            case "pair":
+                result = gresult(2, nb, *args)
+            case "three":
+                result = gresult(3, nb, *args)
+                print("-of-a-kind", end="")
+            case "four":
+                result = gresult(4, nb, *args)
+                print("-of-a-kind", end="")
+            case "yams":
+                result = gresult(5, nb, *args)
+            case "straight":
+                result = gstraight(nb, *args)
+            case _:
+                raise Exception("Invalid combination\n")
+        print(f": {result:.2f}%")
+    elif len(arg) == 3:
+        if cbn == "full":
+            nb1: int = gnb(arg[1], 1)
+            nb2: int = gnb(arg[2], 1)
+            res = gfull(nb1, nb2, *args)
+        else:
+            raise Exception("Error :(\n")
+        print(f"Chances to get a {str(nb1)} full of {str(nb2)}: {res:.2f}%")
+    else:
+        raise Exception("Error :(\n")
+
+
+def main() -> None:
+    try:
+        if len(argv) == 2:
+            if argv[1] == "-h":
+                man_help()
+        elif len(argv) == 7:
+            compute_result(argv[6], *[gnb(argv[x]) for x in range(1, 6)])
+        else:
+            raise Exception("Invalid number of argument\n")
+    except Exception as error:
+        stderr.write(str(error))
+        exit(84)
+
+
+if __name__ == "__main__":
+    main()

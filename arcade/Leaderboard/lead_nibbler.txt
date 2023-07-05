@@ -1,0 +1,5 @@
+Hacker  -> 999
+Alexis  -> 50
+Sacha  -> 40
+Hdmi  -> 20
+Maxim  -> 10

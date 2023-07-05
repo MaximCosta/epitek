@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/maxim/code/epitech_project/delivery/bsmysokoban'
+cc -W -Wall -Wextra   -c -o matrix.o matrix.c
+cc  matrix.o -o matrix  -lncurses
+make: Leaving directory '/home/maxim/code/epitech_project/delivery/bsmysokoban'
+ 

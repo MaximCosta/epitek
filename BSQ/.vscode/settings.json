@@ -1,0 +1,8 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.associations": {
+        "*.js": "javascriptreact",
+        "types.h": "c",
+        "bsq.h": "c"
+    }
+}

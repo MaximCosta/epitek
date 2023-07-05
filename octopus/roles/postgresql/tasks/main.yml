@@ -1,0 +1,115 @@
+- name: Add PostgreSQL GPG key
+  become: true
+  ansible.builtin.apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+
+- name: Add PostgreSQL repository
+  become: true
+  apt_repository:
+    repo: deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main
+    state: present
+    filename: pgdg.list
+    update_cache: yes
+
+
+- name: Install PostgreSQL
+  become: true
+  apt:
+    name:
+      - postgresql-12
+      - postgresql-client-12
+    state: present
+    update_cache: yes
+  register: postgresql_install
+
+- name: Update postgresql config
+  become: true
+  copy:
+    src: pg_hba.conf
+    dest: /etc/postgresql/12/main/pg_hba.conf
+    owner: root
+    group: root
+    mode: 0644
+  register: postgresql_config
+
+- name: Configure PostgreSQL. Set listen_addresses.
+  lineinfile: dest=/etc/postgresql/12/main/postgresql.conf
+    regexp="listen_addresses =" line="listen_addresses = '*'" state=present
+  register: postgresql_config_listen_addresses
+
+- name: Enable postgresql service
+  become: true
+  systemd:
+    name: postgresql
+    enabled: yes
+  register: postgresql_status
+
+- name: Restart postgresql service
+  systemd:
+    name: postgresql
+    state: restarted
+    enabled: yes
+  when: postgresql_install.changed or postgresql_config_listen_addresses.changed or postgresql_config.changed
+
+- name: Reload postgresql config
+  community.postgresql.postgresql_query:
+    login_user: postgres
+    db: postgres
+    query: SELECT pg_reload_conf()
+  when: not postgresql_status.changed and not postgresql_install.changed and postgresql_config.changed
+
+- name: Create paul database
+  postgresql_db:
+    login_user: postgres
+    state: present
+    name: "{{ postgresql_db }}"
+
+- name: Copy schema.sql
+  copy:
+    src: schema.sql
+    dest: /etc/postgresql/12/main/schema.sql
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Apply database schema
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  changed_when: False # Not idempotent
+  community.postgresql.postgresql_script:
+    db: "{{ postgresql_db }}"
+    login_user: postgres
+    path: /etc/postgresql/12/main/schema.sql
+
+- name: Create paul user
+  postgresql_user:
+    login_user: postgres
+    name: "{{ postgresql_user }}"
+    password: "{{ postgresql_pass }}"
+    db: "{{ postgresql_db }}"
+    state: present
+
+- name: Revoke all privileges from paul user on public schema
+  changed_when: False # Not idempotent (https://github.com/ansible-collections/community.postgresql/issues/44)
+  community.postgresql.postgresql_privs:
+    login_user: postgres
+    database: "{{ postgresql_db }}"
+    role: "{{ postgresql_user }}"
+    schema: public
+    objs: ALL_IN_SCHEMA
+    privs: ALL
+    state: absent
+
+- name: Grant privileges to paul user
+  changed_when: False # Not idempotent (https://github.com/ansible-collections/community.postgresql/issues/44)
+  community.postgresql.postgresql_privs:
+    login_user: postgres
+    database: "{{ postgresql_db }}"
+    state: present
+    privs: SELECT,INSERT,UPDATE
+    type: table
+    objs: "{{ postgresql_table }}"
+    schema: public
+    roles: "{{ postgresql_user }}"
+    grant_option: true

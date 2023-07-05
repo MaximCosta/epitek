@@ -1,0 +1,124 @@
+#!/usr/bin/python3
+
+import sys
+import numpy as np
+
+# function to compute the joint probability of X and Y
+def joint_prob(a, b):
+    joint = np.zeros((5, 5))
+    for x in range(10, 60, 10):
+        for y in range(10, 60, 10):
+            numerator = (a - x) * (b - y)
+            denominator = (5 * a - 150) * (5 * b - 150)
+            joint[x//10-1, y//10-1] = numerator / denominator
+    return joint
+
+# function to compute the marginal probability of X and Y
+def marginal_prob(joint):
+    marginal_x = np.sum(joint, axis=1)
+    marginal_y = np.sum(joint, axis=0)
+    return marginal_x, marginal_y
+
+# function to compute the probability of Z
+def prob_z(joint):
+    prob = np.zeros(9)
+    for i, z in enumerate(range(20, 110, 10)):
+        for x in range(10, 60, 10):
+            for y in range(10, 60, 10):
+                if x + y == z:
+                    prob[i] += joint[x//10-1, y//10-1]
+    return prob
+
+# function to compute the expected value and variance of X and Y
+def expected_value_and_variance(prob):
+    ev = np.sum(prob * np.arange(10, 60, 10))
+    variance = np.sum(prob * np.square(np.arange(10, 60, 10) - ev))
+    return ev, variance
+
+# function to compute the expected value and variance of Z
+def expected_value_and_variance_z(prob):
+    ev = np.sum(prob * np.arange(20, 110, 10))
+    variance = np.sum(prob * np.square(np.arange(20, 110, 10) - ev))
+    return ev, variance
+
+def print_results(joint_law, X_law, Y_law, Z_law, E_X, V_X, E_Y, V_Y, E_Z, V_Z):
+    # print joint law of (X, Y)
+    print("---------------------------------------------------------------------------------------------------------")
+    print("          X=10      X=20      X=30      X=40      X=50      Y law")
+    for i in range(5):
+        print(f"Y={10*(i+1)}", end="  ")
+        for j in range(5):
+            print(f"    {joint_law[i][j]:.3f}", end=" ")
+        print(f"    {Y_law[i]:.3f}")
+    print("X law", end=" ")
+    for i in range(5):
+        print(f"    {X_law[i]:.3f}", end=" ")
+    print("    1.000")
+
+    # print law of Z
+    print("---------------------------------------------------------------------------------------------------------")
+    print("z", end="         ")
+    for i in range(9):
+        print(f"{10+10*(i+1)}", end="        ")
+    print("")
+    print("p(Z=z)", end="    ")
+    for i in range(9):
+        print(f"{Z_law[i]:.3f}", end="     ")
+    print("")
+
+    # print expected values and variances
+    print("---------------------------------------------------------------------------------------------------------")
+    print(f"expected value of X:          {E_X:.1f}")
+    print(f"variance of X:                {V_X:.1f}")
+    print(f"expected value of Y:          {E_Y:.1f}")
+    print(f"variance of Y:                {V_Y:.1f}")
+    print(f"expected value of Z:          {E_Z:.1f}")
+    print(f"variance of Z:                {V_Z:.1f}")
+    print("---------------------------------------------------------------------------------------------------------")
+
+# main function
+def main():
+    # check if correct number of arguments are provided
+    if "-h" in sys.argv:
+        print("USAGE")
+        print("    ./202unsold a b")
+        print("DESCRIPTION")
+        print("    a        constant computed from past results")
+        print("    b        constant computed from past results")
+        sys.exit(84)
+    if len(sys.argv) != 3:
+        print("Error: Invalid arguments")
+        sys.exit(84)
+
+    try:
+        a = int(sys.argv[1])
+        b = int(sys.argv[2])
+    except ValueError:
+        print("Error: Invalid arguments")
+        sys.exit(84)
+
+    if a <= 50 or b <= 50:
+        print("Error: Invalid arguments, a and b should be greater than 50")
+        sys.exit(84)
+
+    # compute joint probability of X and Y
+    joint = joint_prob(a, b)
+
+    # compute marginal probability of X and Y
+    marginal_x, marginal_y = marginal_prob(joint)
+
+    # compute probability of Z
+    prob = prob_z(joint)
+
+    # compute expected value and variance of X and Y
+    ex_x, var_x = expected_value_and_variance(marginal_x)
+    ex_y, var_y = expected_value_and_variance(marginal_y)
+
+    # compute expected value and variance of Z
+    ex_z, var_z = expected_value_and_variance_z(prob)
+
+    # print results
+    print_results(joint, marginal_x, marginal_y, prob, ex_x, var_x, ex_y, var_y, ex_z, var_z)
+
+if __name__ == "__main__":
+    main()

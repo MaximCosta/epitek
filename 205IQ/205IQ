@@ -1,0 +1,74 @@
+#!/usr/bin/python3
+
+from sys import exit as cexit, argv, stderr
+from math import sqrt, exp, pi
+argc: int = len(argv)
+
+def frange(start: float, stop: float, step: float = 1.0) -> float:
+    i: float = start
+    while i < stop:
+        yield i
+        i += step
+
+def exit_error(msg: str = "", code: int = 0):
+    print(msg, file=stderr)
+    cexit(code)
+
+def print_help(code: int = 0):
+    print("USAGE")
+    print("\t./205IQ u s [IQ1] [IQ2]\n")
+    print("DESCRIPTION")
+    print("\tu mean")
+    print("\ts standard deviation")
+    print("\tIQ1 minimum IQ")
+    print("\tIQ2 maximum IQ")
+    cexit(code)
+
+def e_int(x :any) -> int:
+    try:
+        return int(x)
+    except:
+        exit_error(f"Error: invalid argument: {x} must be a int value", 84)
+
+def error_handling() -> list:
+    tab: list = []
+    try:
+        for i in range(1, argc):
+            tab.append(e_int(argv[i]))
+            if (0 > tab[i - 1] or tab[i - 1] > 200):
+                exit_error("Error: invalid argument: IQ must be between 0 and 200", 84)
+    except:
+        print_help(84)
+    return tab
+
+def exec_calc(x: int, tab: list[int]) -> float:
+    res: float = (1 / (float(tab[1]) * sqrt(2 * pi))) * exp(-0.5 * pow((float(tab[0]) - float(x)) / float(tab[1]), 2))
+    print(x, format(round(res, 5), ".5f"))
+    return res
+
+def percent(tab: list[int], index: float, res: float = 0.0) -> float:
+    max: int = tab[-1]
+    for i in frange(index, max, 0.01):
+        res: float = res + (1 / (float(tab[1]) * sqrt(2 * pi))) * exp(-0.5 * pow((float(i) - float(tab[0])) / float(tab[1]), 2))
+    return res
+
+def main_loop():
+    tab: list[int] = error_handling()
+    if len(tab) == 2:
+        for i in range(0, 201):
+            exec_calc(i, tab)
+    elif len(tab) == 3:
+        print(f"{format(percent(tab, 0.0), '.1f')}% of people have an IQ inferior to {tab[2]}")
+    elif len(tab) == 4:
+        print(f"{format(percent(tab, tab[2]), '.1f')}% of people have an IQ between {tab[2]} and {tab[3]}")
+    cexit(0)
+
+def main():
+    if "-h" in argv or "--help" in argv:
+        print_help(0)
+    if 3 <= argc <= 5:
+        main_loop()
+    cexit(84)
+
+if __name__ == "__main__":
+    main()

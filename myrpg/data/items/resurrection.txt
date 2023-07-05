@@ -1,0 +1,5 @@
+RESURRECTION
+If you die, this item will grant
+you an extra life. To use it, it
+must be equipped at the time
+of your death.

@@ -1,0 +1,74 @@
+#!/usr/bin/env python3
+
+import sys
+import math
+
+def print_usage():
+    print('USAGE')
+    print('    ./206neutrinos n a h sd')
+    print('')
+    print('DESCRIPTION')
+    print('    n\t    number of values')
+    print('    a\t    arithmetic mean')
+    print('    h\t    harmonic mean')
+    print('    sd\t    standard deviation')
+    sys.exit(0)
+
+def parse_args(av):
+    if len(av) == 2 and av[1] == '-h':
+        print_usage()
+    if len(av) != 5:
+        sys.exit(84)
+
+    try:
+        n = float(av[1])
+        a = float(av[2])
+        h = float(av[3])
+        sd = float(av[4])
+    except ValueError:
+        sys.exit(84)
+
+    if n <= 0 or a <= 0 or h <= 0 or sd <= 0:
+        sys.exit(84)
+
+    return n, a, h, sd
+
+def update_data(n, a, h, sd, value):
+    n += 1
+
+    new_a = a + (value - a) / n
+    new_sd = math.sqrt(((n - 1) * sd ** 2 + (value - a) * (value - new_a)) / n)
+
+    rms = math.sqrt((n - 1) / n * (a ** 2 + sd ** 2) + value ** 2 / n)
+    new_h = n / ((n - 1) / h + 1 / value)
+
+    return n, new_a, new_h, new_sd, rms
+
+def main(av):
+    n, a, h, sd = parse_args(av)
+
+    while True:
+        next_value = input('Enter next value: ')
+
+        if next_value == 'END' or next_value == '':
+            break
+
+        try:
+            float(next_value)
+        except ValueError:
+            sys.exit(84)
+
+        value = float(next_value)
+        n, a, h, sd, rms = update_data(n, a, h, sd, value)
+
+        print(f"    Number of values:   {n:.0f}")
+        print(f"    Standard deviation: {sd:.2f}")
+        print(f"    Arithmetic mean:    {a:.2f}")
+        print(f"    Root mean square:   {rms:.2f}")
+        print(f"    Harmonic mean:      {h:.2f}")
+        print()
+
+    sys.exit(0)
+
+if __name__ == '__main__':
+    main(sys.argv)

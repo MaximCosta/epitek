@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "*.js": "javascriptreact",
+        "game.h": "c",
+        "my_printf.h": "c",
+        "math.h": "c",
+        "stdarg.h": "c",
+        "my.h": "c",
+        "death.C": "cpp"
+    }
+}

@@ -1,0 +1,241 @@
+#!/usr/bin/python3
+
+import sys
+from collections import deque
+import numpy as np
+
+
+class BotState:
+    def __init__(self):
+        self.timeBank: int = 0
+        self.maxTimeBank: int = 0
+        self.timePerMove: int = 1
+        self.candleInterval: int = 1
+        self.candleFormat: list[str] = []
+        self.candlesTotal: int = 0
+        self.candlesGiven: int = 0
+        self.initialStack: int = 0
+        self.transactionFee: float = 0.1
+        self.date: int = 0
+        self.stacks: dict[str, float] = {}
+        self.charts: dict[str, Chart] = {}
+
+    def update_chart(self, pair: str, new_candle_str: str) -> None:
+        if pair not in self.charts:
+            self.charts[pair]: Chart = Chart()
+        new_candle_obj: Candle = Candle(self.candleFormat, new_candle_str)
+        self.charts[pair].add_candle(new_candle_obj)
+
+    def update_stack(self, key: str, value: float) -> None:
+        self.stacks[key]: float = value
+
+    def update_settings(self, key: str, value: str):
+        match key:
+            case "timebank":
+                self.maxTimeBank: int = int(value)
+                self.timeBank: int = int(value)
+            case "time_per_move":
+                self.timePerMove: int = int(value)
+            case "candle_interval":
+                self.candleInterval: int = int(value)
+            case "candle_format":
+                self.candleFormat: list[str] = value.split(",")
+            case "candles_total":
+                self.candlesTotal: int = int(value)
+            case "candles_given":
+                self.candlesGiven: int = int(value)
+            case "initial_stack":
+                self.initialStack: int = int(value)
+            case "transaction_fee_percent":
+                self.transactionFee: float = float(value)
+
+    def update_game(self, key: str, value: str) -> None:
+        if key == "next_candles":
+            new_candles = value.split(";")
+            self.date = int(new_candles[0].split(",")[1])
+            for candle_str in new_candles:
+                candle_infos = candle_str.strip().split(",")
+                self.update_chart(candle_infos[0], candle_str)
+        elif key == "stacks":
+            new_stacks = value.split(",")
+            for stack_str in new_stacks:
+                stack_infos = stack_str.strip().split(":")
+                self.update_stack(stack_infos[0], float(stack_infos[1]))
+
+
+class Trade:
+    def __init__(self, amount: int, current_value: int, bot: BotState) -> None:
+        self.amount: int = amount
+        self.current_value: int = current_value
+        self.bot: BotState = bot
+
+    def stop_trade(self, current_value: int) -> int:
+        loss_threshold: float = 3 / 100 * self.current_value
+        profit_threshold: float = 5 / 100 * self.current_value
+
+        if current_value < self.current_value - loss_threshold:
+            return self.amount
+        if current_value > self.current_value + profit_threshold:
+            return self.amount
+        return 0
+
+
+class Bot:
+    def __init__(self) -> None:
+        """Initialise un objet Bot avec ses variables et attributs."""
+        self.botState: BotState = BotState()
+        self.dca_amount: float = 0.0001  # Montant pour l'achat DCA
+        self.dca_interval: int = 1  # Intervalle pour l'achat DCA
+        self.ema_period: int = 10  # Période de l'EMA
+        self.ema_values: dict[str, None | float | np.float64] = {}  # Dictionnaire pour stocker les valeurs EMA
+        self.closing_prices: dict[str, deque] = {}  # Dictionnaire pour stocker les prix de clôture
+        self.dca_counter: int = 0  # Compteur pour l'achat DCA
+        self.trade_list: list[Trade] = []  # Liste des trades effectués
+        self.first: bool = True  # Indicateur du premier achat
+
+    def run(self) -> None:
+        """Exécute la boucle principale du Bot, lit l'entrée et appelle la méthode de parsing."""
+        while True:
+            reading = input()  # Lecture de l'entrée
+            if len(reading) == 0:
+                continue
+            self.parse(reading)  # Appel de la méthode de parsing
+
+    def parse(self, info: str) -> None:
+        """Analyse l'information en entrée et exécute les actions correspondantes."""
+        tmp: list[str] = info.split(" ")
+        match tmp[0]:
+            case "settings":
+                self.botState.update_settings(tmp[1], tmp[2])
+            case "update":
+                if tmp[1] == "game":
+                    self.botState.update_game(tmp[2], tmp[3])
+                    self.update_ema_values()
+            case "action":
+                current_closing_price = self.botState.charts["USDT_BTC"].closes[-1]
+                if self.should_buy(current_closing_price):
+                    self.execute_trade("buy", current_closing_price)
+                elif self.should_sell(current_closing_price):
+                    self.execute_trade("sell", current_closing_price)
+                else:
+                    print("no_moves", flush=True)
+                    self.dca_counter += 1
+
+    def should_dca(self) -> bool:
+        """Vérifie si l'achat DCA doit être effectué."""
+        return self.dca_counter >= self.dca_interval
+
+    def calculate_dca_amount(self, affordable: float) -> float:
+        """Calcule le montant pour l'achat DCA."""
+        return self.dca_amount * affordable
+
+    def update_ema_values(self, key: str = "USDT_BTC") -> None:
+        """Met à jour les valeurs EMA en utilisant les prix de clôture."""
+        closing_prices: list[float] = self.botState.charts[key].closes
+        if key not in self.closing_prices:
+            self.closing_prices[key] = deque(maxlen=self.ema_period)
+            self.ema_values[key] = None
+
+        for price in closing_prices:
+            self.closing_prices[key].append(price)  # Ajout des prix de clôture à la deque
+
+        if len(self.closing_prices[key]) == self.ema_period:
+            ema_value: None | np.float64 = np.mean(self.closing_prices[key])  # Calcul de la valeur EMA
+            if self.ema_values[key] is None:
+                self.ema_values[key] = ema_value
+            else:
+                alpha: float = 2 / (self.ema_period + 1)
+                self.ema_values[key] = alpha * ema_value + (1 - alpha) * self.ema_values[key]
+
+    def should_buy(self, current_price: int) -> bool:
+        """Vérifie si un achat doit être effectué en comparant le prix actuel avec la valeur EMA."""
+        return current_price > self.ema_values["USDT_BTC"]
+
+    def should_sell(self, current_price: int) -> bool:
+        """Vérifie si une vente doit être effectuée en comparant le prix actuel avec la valeur EMA et les trades existants."""
+        total: int = 0
+        should_sell: int = 0
+        for trade in self.trade_list:
+            should_sell: int = trade.stop_trade(current_price)
+            if should_sell != 0:
+                total += should_sell
+                self.trade_list.remove(trade)
+        ema_value: None | float | np.float64 = self.ema_values["USDT_BTC"]
+        return current_price <= ema_value or total
+
+    def execute_trade(self, action: str, price: int) -> None:
+        """Exécute un trade d'achat ou de vente en fonction de l'action spécifiée."""
+        if action == "buy":
+            dollars: float = self.botState.stacks["USDT"]
+            affordable: float = dollars / price
+            dca_amount: float = self.calculate_dca_amount(affordable)
+            if self.first:
+                print(f"buy USDT_BTC {0.2 * affordable}", flush=True)
+                self.trade_list.append(Trade(0.2 * affordable, price, self))
+                self.first: bool = False
+                return
+            if self.should_dca():
+                print(f"buy USDT_BTC {dca_amount}", flush=True)
+                self.trade_list.append(Trade(dca_amount, price, self))
+                self.dca_counter: int = 0
+            else:
+                print("no_moves", flush=True)
+                self.dca_counter += 1
+        elif action == "sell":
+            print(self.botState.stacks, file=sys.stderr)
+            btc: float = self.botState.stacks["BTC"]  # Update the key to match the stack of BTC
+            if btc:
+                print(f"sell USDT_BTC {btc}", flush=True)
+            else:
+                print("no_moves", flush=True)
+                self.dca_counter += 1
+
+
+class Candle:
+    def __init__(self, format: list[str], intel: str):
+        tmp: list[str] = intel.split(",")
+        for key, val in zip(format, tmp):
+            match key:
+                case "pair":
+                    self.pair: str = val
+                case "date":
+                    self.date: int = int(val)
+                case "high":
+                    self.high: float = float(val)
+                case "low":
+                    self.low: float = float(val)
+                case "open":
+                    self.open: float = float(val)
+                case "close":
+                    self.close: float = float(val)
+                case "volume":
+                    self.volume: float = float(val)
+
+    def __repr__(self) -> str:
+        return f"{self.pair} {self.date} {self.close} {self.volume}"
+
+
+class Chart:
+    def __init__(self):
+        """Initialise un objet Chart avec des listes vides pour stocker les données de bougies japonaises."""
+        self.dates: list[int] = []  # Liste des dates
+        self.opens: list[float] = []  # Liste des prix d'ouverture
+        self.highs: list[float] = []  # Liste des prix les plus hauts
+        self.lows: list[float] = []  # Liste des prix les plus bas
+        self.closes: list[float] = []  # Liste des prix de clôture
+        self.volumes: list[float] = []  # Liste des volumes
+        self.indicators: dict = {}  # Dictionnaire pour stocker les indicateurs supplémentaires
+
+    def add_candle(self, candle):
+        """Ajoute une bougie japonaise à l'objet Chart en extrayant les données nécessaires."""
+        self.dates.append(candle.date)  # Ajoute la date de la bougie
+        self.opens.append(candle.open)  # Ajoute le prix d'ouverture
+        self.highs.append(candle.high)  # Ajoute le prix le plus haut
+        self.lows.append(candle.low)  # Ajoute le prix le plus bas
+        self.closes.append(candle.close)  # Ajoute le prix de clôture
+        self.volumes.append(candle.volume)  # Ajoute le volume
+
+
+if __name__ == "__main__":
+    mybot: Bot = Bot()
+    mybot.run()

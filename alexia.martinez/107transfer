@@ -1,0 +1,73 @@
+#!/usr/bin/python3.9
+
+from sys import argv, exit
+from typing import List
+from argparse import ArgumentParser, Namespace
+
+
+def h() -> None:
+    print("USAGE")
+    print("    ./107transfer [num den]*")
+    print("")
+    print("DESCRIPTION")
+    print("    num    polynomial numerator defined by its coefficients")
+    print("    den    polynomial denominator defined by its coefficients")
+    exit(0)
+
+
+def calc(polynom: list[int], i: float, pos: int = 0) -> int:
+    if pos == len(polynom) - 1:
+        return polynom[pos]
+    else:
+        return polynom[pos] + i * calc(polynom, i, pos + 1)
+
+
+def polynom(formula: str) -> list[int]:
+    arg: List[str] = formula.split("*")
+    polynom: List[int] = []
+    for i in range(len(arg)):
+        polynom.append(int(arg[i]))
+    return polynom
+
+
+def arguments() -> list[list[int]]:
+    parselist: list[list[int]] = []
+    parseargs: ArgumentParser = ArgumentParser()
+    parseargs.add_argument("formula", type=str, nargs="+")
+    args: Namespace = parseargs.parse_args()
+    for i in range(len(args.formula)):
+        try:
+            parselist.append(polynom(args.formula[i]))
+        except ValueError:
+            exit(84)
+    return parselist
+
+
+def iszero(value: float) -> float:
+    if value == 0:
+        exit(84)
+    return value
+
+
+def transfer(args: list[list[int]]) -> None:
+    i: float = 0
+    res: float = 1.0
+    quotient: float = 0.0
+    while i < 1.0001:
+        res = 1
+        for j in range(int(len(args) / 2)):
+            quotient = calc(args[(j * 2) + 1], i)
+            res = res * (calc(args[j * 2], i) / iszero(quotient))
+        print(f"{i:.3f} -> {res:.5f}")
+        i += 0.001
+
+
+def main() -> None:
+    if len(argv) > 1 and argv[1] == "-h":
+        h()
+    args: List[List[int]] = arguments()
+    transfer(args)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,14 @@
+#!/bin/python3.9
+import sys
+
+def my_help():
+    print('USAGE\n\t./108trigo fun a0 a1 a2....\n\nDESCRIPTION\n\tfun\tfunction to be applied,among at least "EXP", "COS", "SIN", "COSH" and "SINH"\n\tai\tcoeficients of the matrix');exit(0)
+
+def check_args():
+    if "--help" in sys.argv or "-h" in sys.argv: my_help()
+    if len(sys.argv) <= 2 or sys.argv[1] not in ["EXP", "COS", "SIN", "COSH", "SINH"]:print("Missing arguments.\nUsage: ./108trigo fun a0 a1 a2 ...", file=sys.stderr);exit(84)
+    try: sys.argv[i] = list(map(float, sys.argv[2:]))
+    except: exit(84)
+def main():check_args()
+if __name__ == '__main__': main()
+

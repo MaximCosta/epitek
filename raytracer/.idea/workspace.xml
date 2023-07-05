@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="raytracer" targetName="raytracer" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7683d329-b550-46ef-a71f-4d8936a6e3a1" name="Changes" comment="add img">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenes/light.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/light.cfg" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="C Epitech Header File" />
+        <option value="C Epitech Source FIle" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev/add_object_shapes" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="15wuohbf" />
+  </component>
+  <component name="ProjectId" id="2OhDUGeKyAmLfqLyPRu5eFtfK1x" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.advertisement.text.overridden&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/nicolas/Epitech/raytracer/core/src/raytracing/primitives&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/core/src/raytracing/primitives" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/core/src/raytracing/primitives" />
+      <recent name="$PROJECT_DIR$/api/display/render" />
+      <recent name="$PROJECT_DIR$/api/display" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Shell Script.run">
+    <list>
+      <item itemvalue="Makefile Target.build" />
+      <item itemvalue="Shell Script.run" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7683d329-b550-46ef-a71f-4d8936a6e3a1" name="Changes" comment="" />
+      <created>1682003935419</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1682003935419</updated>
+      <workItem from="1682003936536" duration="627000" />
+      <workItem from="1682064585790" duration="6414000" />
+      <workItem from="1682072998114" duration="14351000" />
+      <workItem from="1682534617307" duration="705000" />
+      <workItem from="1682598582795" duration="6315000" />
+      <workItem from="1682611111713" duration="2651000" />
+      <workItem from="1682616167178" duration="4205000" />
+      <workItem from="1682665791125" duration="699000" />
+      <workItem from="1682684746257" duration="134000" />
+      <workItem from="1683013961619" duration="18671000" />
+      <workItem from="1683033660258" duration="526000" />
+      <workItem from="1683037978759" duration="8487000" />
+      <workItem from="1683130283629" duration="1980000" />
+      <workItem from="1683182926767" duration="617000" />
+      <workItem from="1683269791360" duration="305000" />
+      <workItem from="1683270263698" duration="145000" />
+      <workItem from="1683270785154" duration="8444000" />
+      <workItem from="1683359871651" duration="13038000" />
+      <workItem from="1683376091645" duration="3932000" />
+      <workItem from="1683380453308" duration="1261000" />
+      <workItem from="1683382255737" duration="2509000" />
+      <workItem from="1683385427450" duration="978000" />
+      <workItem from="1683386443461" duration="13000" />
+      <workItem from="1683388803286" duration="1742000" />
+      <workItem from="1683451881709" duration="8280000" />
+      <workItem from="1683461535236" duration="646000" />
+      <workItem from="1683462250751" duration="4389000" />
+      <workItem from="1683545063299" duration="1178000" />
+      <workItem from="1683614599498" duration="3609000" />
+      <workItem from="1683623678537" duration="51000" />
+      <workItem from="1683632021274" duration="2264000" />
+      <workItem from="1683655528579" duration="4881000" />
+      <workItem from="1683702915239" duration="14358000" />
+      <workItem from="1683801141608" duration="3487000" />
+      <workItem from="1683808879409" duration="730000" />
+      <workItem from="1683811247627" duration="167000" />
+      <workItem from="1683811552951" duration="105000" />
+      <workItem from="1683905405492" duration="2073000" />
+      <workItem from="1684008124910" duration="7478000" />
+      <workItem from="1684015791108" duration="5325000" />
+      <workItem from="1684052279558" duration="6535000" />
+      <workItem from="1684088551420" duration="799000" />
+      <workItem from="1684218843263" duration="1504000" />
+      <workItem from="1684227075630" duration="70000" />
+      <workItem from="1684228346959" duration="19000" />
+    </task>
+    <task id="LOCAL-00024" summary="do multi thread">
+      <created>1683025849870</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1683025849870</updated>
+    </task>
+    <task id="LOCAL-00025" summary="do multi thread">
+      <created>1683033875363</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1683033875363</updated>
+    </task>
+    <task id="LOCAL-00026" summary="add texture and square">
+      <created>1683048709518</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1683048709518</updated>
+    </task>
+    <task id="LOCAL-00027" summary="remove unused file">
+      <created>1683269827482</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1683269827482</updated>
+    </task>
+    <task id="LOCAL-00028" summary="add chessboard">
+      <created>1683271659614</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1683271659614</updated>
+    </task>
+    <task id="LOCAL-00029" summary="add chessboard fix">
+      <created>1683272220182</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1683272220182</updated>
+    </task>
+    <task id="LOCAL-00030" summary="refactor ppm">
+      <created>1683276481686</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1683276481686</updated>
+    </task>
+    <task id="LOCAL-00031" summary="refactor scene">
+      <created>1683359915619</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1683359915619</updated>
+    </task>
+    <task id="LOCAL-00032" summary="add noise texture">
+      <created>1683368492425</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1683368492425</updated>
+    </task>
+    <task id="LOCAL-00033" summary="add noise texture">
+      <created>1683368620432</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1683368620432</updated>
+    </task>
+    <task id="LOCAL-00034" summary="add photo aspect">
+      <created>1683371632986</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1683371632986</updated>
+    </task>
+    <task id="LOCAL-00035" summary="add ambiant light">
+      <created>1683373169457</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1683373169457</updated>
+    </task>
+    <task id="LOCAL-00036" summary="add ambiant light">
+      <created>1683374204884</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1683374204884</updated>
+    </task>
+    <task id="LOCAL-00037" summary="fix bug de 5 heures">
+      <created>1683376804166</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1683376804166</updated>
+    </task>
+    <task id="LOCAL-00038" summary="add plane">
+      <created>1683378431112</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1683378431112</updated>
+    </task>
+    <task id="LOCAL-00039" summary="add plane">
+      <created>1683380475769</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1683380475769</updated>
+    </task>
+    <task id="LOCAL-00040" summary="update PlaneXY">
+      <created>1683382283443</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1683382283443</updated>
+    </task>
+    <task id="LOCAL-00041" summary="fix plane bug">
+      <created>1683386174462</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1683386174462</updated>
+    </task>
+    <task id="LOCAL-00042" summary="fix plane bug">
+      <created>1683386452074</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1683386452074</updated>
+    </task>
+    <task id="LOCAL-00043" summary="fix plane bug">
+      <created>1683388820638</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1683388820638</updated>
+    </task>
+    <task id="LOCAL-00044" summary="fix plane bug">
+      <created>1683389569611</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1683389569611</updated>
+    </task>
+    <task id="LOCAL-00045" summary="try to fix emit problem">
+      <created>1683389772282</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1683389772282</updated>
+    </task>
+    <task id="LOCAL-00046" summary="try to fix emit problem">
+      <created>1683390542765</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1683390542765</updated>
+    </task>
+    <task id="LOCAL-00047" summary="try to fix emit problem">
+      <created>1683455265117</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1683455265117</updated>
+    </task>
+    <task id="LOCAL-00048" summary="try to fix emit problem">
+      <created>1683455619708</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1683455619708</updated>
+    </task>
+    <task id="LOCAL-00049" summary="try to fix emit problem">
+      <created>1683458462272</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1683458462272</updated>
+    </task>
+    <task id="LOCAL-00050" summary="try to fix emit problem">
+      <created>1683462350974</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1683462350975</updated>
+    </task>
+    <task id="LOCAL-00051" summary="SAVE">
+      <created>1683462370473</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1683462370473</updated>
+    </task>
+    <task id="LOCAL-00052" summary="add boxs">
+      <created>1683463842597</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1683463842597</updated>
+    </task>
+    <task id="LOCAL-00053" summary="fix bug">
+      <created>1683542397506</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1683542397507</updated>
+    </task>
+    <task id="LOCAL-00054" summary="fix bug">
+      <created>1683542431616</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1683542431616</updated>
+    </task>
+    <task id="LOCAL-00055" summary="fix bug">
+      <created>1683614620719</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1683614620719</updated>
+    </task>
+    <task id="LOCAL-00056" summary="fix bug">
+      <created>1683614649997</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1683614649997</updated>
+    </task>
+    <task id="LOCAL-00057" summary="remove unused file">
+      <created>1683614684029</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1683614684029</updated>
+    </task>
+    <task id="LOCAL-00058" summary="add builder / 2">
+      <created>1683635543228</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1683635543229</updated>
+    </task>
+    <task id="LOCAL-00059" summary="add builder functions">
+      <created>1683656880702</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1683656880702</updated>
+    </task>
+    <task id="LOCAL-00060" summary="finish builder">
+      <created>1683658097362</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1683658097362</updated>
+    </task>
+    <task id="LOCAL-00061" summary="finish refactor">
+      <created>1683741574612</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1683741574613</updated>
+    </task>
+    <task id="LOCAL-00062" summary="add cylinder">
+      <created>1683802641153</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1683802641154</updated>
+    </task>
+    <task id="LOCAL-00063" summary="fix bug">
+      <created>1683804320694</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1683804320694</updated>
+    </task>
+    <task id="LOCAL-00064" summary="fix bug">
+      <created>1683804618918</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1683804618919</updated>
+    </task>
+    <task id="LOCAL-00065" summary="add cylinder">
+      <created>1683906279332</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1683906279333</updated>
+    </task>
+    <task id="LOCAL-00066" summary="fix">
+      <created>1684052790872</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1684052790873</updated>
+    </task>
+    <task id="LOCAL-00067" summary="add factory bis">
+      <created>1684053383946</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1684053383946</updated>
+    </task>
+    <task id="LOCAL-00068" summary="add good cone scene">
+      <created>1684056743866</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1684056743866</updated>
+    </task>
+    <task id="LOCAL-00069" summary="fix cone">
+      <created>1684057306706</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1684057306706</updated>
+    </task>
+    <task id="LOCAL-00070" summary="fix cone">
+      <created>1684058666494</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1684058666494</updated>
+    </task>
+    <task id="LOCAL-00071" summary="add scenes">
+      <created>1684227085875</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1684227085875</updated>
+    </task>
+    <task id="LOCAL-00072" summary="add img">
+      <created>1684227126317</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1684227126317</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticEditVcpkgJson value="false" />
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticFoundErrors value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="refactor ppm" />
+    <MESSAGE value="refactor scene" />
+    <MESSAGE value="add noise texture" />
+    <MESSAGE value="add photo aspect" />
+    <MESSAGE value="add ambiant light" />
+    <MESSAGE value="fix bug de 5 heures" />
+    <MESSAGE value="add plane" />
+    <MESSAGE value="update PlaneXY" />
+    <MESSAGE value="fix plane bug" />
+    <MESSAGE value="try to fix emit problem" />
+    <MESSAGE value="SAVE" />
+    <MESSAGE value="add boxs" />
+    <MESSAGE value="remove unused file" />
+    <MESSAGE value="add builder / 2" />
+    <MESSAGE value="add builder functions" />
+    <MESSAGE value="finish builder" />
+    <MESSAGE value="finish refactor" />
+    <MESSAGE value="fix bug" />
+    <MESSAGE value="add cylinder" />
+    <MESSAGE value="fix" />
+    <MESSAGE value="add factory bis" />
+    <MESSAGE value="add good cone scene" />
+    <MESSAGE value="fix cone" />
+    <MESSAGE value="add scenes" />
+    <MESSAGE value="add img" />
+    <option name="LAST_COMMIT_MESSAGE" value="add img" />
+  </component>
+</project>

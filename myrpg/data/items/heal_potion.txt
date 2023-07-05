@@ -1,0 +1,7 @@
+Heal Potion 
+This potion allows you to
+regenerate 25 HP. If the
+item is equipped
+(ATTENTION -> after use
+the potion will be
+destroyed).

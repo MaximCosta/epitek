@@ -1,0 +1,78 @@
+#!/bin/python3
+
+from sys import argv, stdout, stderr, exit as quit
+from math import sqrt
+from typing import TextIO
+
+def exit_msg(code: int, msg: str, out: TextIO) -> None:
+    print(msg, file=out)
+    exit(code)
+
+def help() -> None:
+    print("USAGE")
+    print("\t./209poll pSize sSize p")
+    print("DESCRIPTION")
+    print("\tpSize\tsize of the population")
+    print("\tsSize\tsize of the sample (supposed to be representative)")
+    print("\tp\tpercentage of voting intentions for a specific candidate")
+    quit(0)
+
+def toInt(Str: str) -> int:
+    try:
+        result: int = int(Str)
+    except:
+        quit(84)
+    return result
+
+def toFloat(Str: str) -> float:
+    try:
+        result: float = float(Str)
+    except:
+        quit(84)
+    return result
+
+def check(nb: float, min: float = 0.0, max: float = 100.0) -> float:
+    if (nb > max):
+        return 100.0
+    elif (nb < min):
+        return 0.0
+    else:
+        return nb
+
+def parser() -> tuple[int, int, float]:
+    if (len(argv) == 2 and argv[1] == "-h"):
+        help()
+    if (len(argv) != 4):
+        quit (84)
+
+    pop: int = toInt(argv[1])
+    sample: int = toInt(argv[2])
+    intent: float = toFloat(argv[3])
+    
+    if (pop <= 0 or sample <= 0 or sample > pop or intent < 0 or intent > 100):
+        quit (84)
+    return pop, sample, intent
+
+def getVariance(pop: int, sample: int, intent: float) -> float:
+    s: float = intent / 100
+    variance: float = ((s * (1 - s)) / sample) * ((pop - sample) / (pop - 1))
+    return variance
+
+def main() -> None:
+    pop, sample, intent = parser()
+
+    var = getVariance(pop, sample, intent)
+    i95 = (2 * 1.96 * sqrt(var)) / 2 * 100
+    i99 = (2 * 2.58 * sqrt(var)) / 2 * 100
+
+    print("Population size:\t", pop, sep='')
+    print("Sample size:\t\t", sample, sep='')
+    print("Voting intentions:\t", "%.2f" % intent, "%", sep='')
+    print("Variance:\t\t", "%.6f" % var, sep='')
+    print("95% confidence interval: ", end='')
+    print("[", "%.2f" % check(intent - i95), "%; ", "%.2f" % check(intent + i95), "%]", sep='')
+    print("99% confidence interval: ", end='')
+    print("[", "%.2f" % check(intent - i99), "%; ", "%.2f" % check(intent + i99), "%]", sep='')
+
+if __name__ == "__main__":
+    main()

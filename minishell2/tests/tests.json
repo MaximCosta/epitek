@@ -1,0 +1,158 @@
+{
+    "empty": {
+        "command": "echo '\n'|{BIN}",
+        "stdout": "",
+        "stderr": "",
+        "return_value": 0
+    },
+    "parsing space" : {
+        "command": "echo '                  ls       -la'|{BIN}",
+        "stdout_from_prog": "echo 'ls -la'|tcsh",
+        "stderr": "",
+        "return_value": 0
+    },
+    "parsing tab" : {
+        "command": "echo '\t ls\t -la'|{BIN}",
+        "stdout_from_prog": "echo 'ls -la'|tcsh",
+        "stderr": "",
+        "return_value": 0
+    },
+    "parsing space and tab" : {
+        "command": "echo '\t        ls        \t      -la'|{BIN}",
+        "stdout_from_prog": "echo 'ls -la'|tcsh",
+        "stderr": "",
+        "return_value": 0
+    },
+    "simple command": {
+        "command": "echo 'pwd'|{BIN}",
+        "stdout_from_prog": "pwd",
+        "stderr": "",
+        "return_value": 0
+    },
+    "simple command with multi args" : {
+        "command": "echo 'ls -l -a -d'|{BIN}",
+        "stdout_from_prog": "ls -l -a -d",
+        "stderr": "",
+        "return_value": 0
+    },
+    "simple exec": {
+        "command": "echo 'tests/folder/simple'|{BIN}",
+        "stdout_from_prog": "tests/folder/simple",
+        "stderr": "",
+        "return_value": 0
+    },
+    "wrong simple command": {
+        "command": "echo 'bark'|{BIN}",
+        "stdout": "",
+        "stderr": "bark: Command not found.\n",
+        "return_value": 1
+    },
+    "simple cd": {
+        "command": "echo 'cd ..\npwd'|{BIN}",
+        "stdout_from_prog": "echo 'cd ..\npwd'|tcsh",
+        "stderr": "",
+        "return_value": 0
+    },
+    "cd home": {
+        "command": "echo 'cd\npwd'|{BIN}",
+        "stdout_from_prog": "echo 'cd\npwd'|tcsh",
+        "stderr": "",
+        "return_value": 0
+    },
+    "cd error file": {
+        "command": "echo 'cd {BIN}'|{BIN}",
+        "stdout": "",
+        "stderr": "{BIN}: Not a directory.\n",
+        "return_value": 1
+    },
+    "cd error not found": {
+        "command": "echo 'cd bark'|{BIN}",
+        "stdout": "",
+        "stderr": "bark: No such file or directory.\n",
+        "return_value": 1
+    },
+    "cd error not permission": {
+        "command": "echo 'cd /wslNjHoHo'|{BIN}",
+        "stdout": "",
+        "stderr": "/wslNjHoHo: Permission denied.\n",
+        "return_value": 1
+    },
+    "cd error too many args": {
+        "command": "echo 'cd bark bark'|{BIN}",
+        "stdout": "",
+        "stderr": "cd: Too many arguments.\n",
+        "return_value": 1
+    },
+    "cd error unset OLDPWD": {
+        "command": "echo 'cd -'|{BIN}",
+        "stdout": "",
+        "stderr": ": No such file or directory.\n",
+        "return_value": 1
+    },
+    "exit": {
+        "command": "echo 'exit 42'|{BIN}",
+        "stdout": "",
+        "sterr": "",
+        "return_value": 42
+    },
+    "exit error": {
+        "command": "echo 'exit bark'|{BIN}",
+        "stdout": "",
+        "stderr": "exit: Expression Syntax.\n",
+        "return_value": 1
+    },
+    "exit error badly": {
+        "command": "echo 'exit 4b'|{BIN}",
+        "stdout": "",
+        "stderr": "exit: Badly formed number.\n",
+        "return_value": 1
+    },
+    "exit error too much args": {
+        "command": "echo 'exit 84 84'|{BIN}",
+        "stdout": "",
+        "stderr": "exit: Expression Syntax.\n",
+        "return_value": 1
+    },
+    "setenv" : {
+        "command": "echo 'setenv bark epitech\nenv'|{BIN}|grep bark|cut -c 6-",
+        "stdout": "epitech\n",
+        "stderr": "",
+        "return_value": 0
+    },
+    "unsetenv" : {
+        "command": "echo 'setenv bark epitech\nenv\nunsetenv bark\nenv'|{BIN}|grep bark|cut -c 6-",
+        "stdout": "epitech\n",
+        "stderr": "",
+        "return_value": 0
+    },
+    "setenv error too many args" : {
+        "command": "echo 'setenv bark bark bark'|{BIN}",
+        "stdout": "",
+        "stderr": "setenv: Too many arguments.\n",
+        "return_value": 1
+    },
+    "setenv error variable name first" : {
+        "command": "echo 'setenv ^bark epitech'|{BIN}",
+        "stdout": "",
+        "stderr": "setenv: Variable name must begin with a letter.\n",
+        "return_value": 1
+    },
+    "setenv error variable alpha char" : {
+        "command": "echo 'setenv bark^ epitech'|{BIN}",
+        "stdout": "",
+        "stderr": "setenv: Variable name must contain alphanumeric characters.\n",
+        "return_value": 1
+    },
+    "unsetenv path & notfound" : {
+        "command": "echo 'unsetenv PATH\nls'|{BIN}",
+        "stdout": "",
+        "stderr": "ls: Command not found.\n",
+        "return_value": 1
+    },
+    "unsetenv multi" : {
+        "command": "echo 'setenv bark a\nsetenv epitech b\nenv\nunsetenv epitech bark\nenv'|{BIN}|grep 'bark=\\|epitech='",
+        "stdout": "bark=a\nepitech=b\n",
+        "stderr": "",
+        "return_value": 0
+    }
+}

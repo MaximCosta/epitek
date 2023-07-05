@@ -1,0 +1,61 @@
+#!/bin/python3
+
+from sys import argv, exit, stderr
+from math import sqrt, acos, pi
+
+
+def error():
+    stderr.write("Bad argument.\n")
+    exit(84)
+
+
+def isfloat(str):
+    try: return float(str)
+    except: error()
+
+
+def main():
+
+    if len(argv) <= 1: error()
+    if argv[1] == "-h":
+        print("""USAGE
+    ./101pong x0 y0 z0 x1 y1 z1 n
+
+DESCRIPTION
+    x0 ball abscissa at time t - 1
+    y0 ball ordinate at time t - 1
+    z0 ball altitude at time t - 1
+    x1 ball abscissa at time t
+    y1 ball ordinate at time t
+    z1 ball altitude at time t
+    n time shift (greater than or equal to zero, integer)""")
+        exit(0)
+
+    if len(argv) != 8: error()
+    elt = list(map(isfloat, argv[1:]))
+    if elt[-1] < 0 or int(elt[-1]) != elt[-1]: error()
+
+    res = list(map(sum, zip(elt[3:6], map(lambda x: -x, elt[0:3]))))
+    print(f"The velocity vector of the ball is:")
+    print(f"({res[0]:.2f}, {res[1]:.2f}, {res[2]:.2f})")
+
+    res = [res[i] * elt[-1] + elt[3 + i] for i in range(3)]
+    print(f"At time t + {int(elt [-1])}, ball coordinates will be:")
+    print(f"({res[0]:.2f}, {res[1]:.2f}, {res[2]:.2f})")
+
+    if (elt[5] * res[2] > 0):
+        print("The ball won't reach the paddle.")
+        exit(0)
+
+    res = sum(map(lambda x: pow(elt[x]-elt[3+x], 2), range(3)))
+    degrees = abs(acos((elt[5] - elt[2])/(sqrt(res))) * (180/pi) - 90)
+    if (degrees < 0 or degrees > 90):
+        print("The ball won't reach the paddle.")
+        exit(0)
+    print("The incidence angle is:")
+    print(f"{degrees:.2f} degrees")
+    exit(0)
+
+
+if __name__ == '__main__':
+    main()

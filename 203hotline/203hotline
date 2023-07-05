@@ -1,0 +1,78 @@
+#!/usr/bin/python3
+
+from sys import argv
+from math import factorial, exp
+from time import time as Time
+
+PHONE_HOTLINE: int = 25
+PEOPLE: int = 3500
+CALLS_HOUR_PER_DAY_PER_WORKER: int = 8
+
+
+def binomial(n: int, k: int) -> int:
+    return factorial(n) // (factorial(k) * factorial(n - k))
+
+
+def binomial_distribution(n: int) -> None:
+    prob: float = n / (3600 * CALLS_HOUR_PER_DAY_PER_WORKER)
+    begin: float = Time()
+    overload: float = 0
+    print("Binomial distribution:\n")
+    for i in range(0, 51):
+        if i > 0 and (i % 5) != 0:
+            print(end="\t")
+        result: float = binomial(PEOPLE, i) * (prob**i) * ((1 - prob) ** (PEOPLE - i))
+        print("%d -> %.3f" % (i, result), end="")
+        overload += result * (i > PHONE_HOTLINE)
+        if (i + 1) % 5 == 0:
+            print(end="\n")
+    overload = 1 if n > 320 else overload
+    print("\nOverload: %.1f" % (overload * 100) + "%")
+    print("Computation time: %.2f ms" % ((Time() - begin) * 1000))
+
+
+def poisson_distribution(n: int) -> None:
+    prob: float = PEOPLE * (n / (60 * 60 * CALLS_HOUR_PER_DAY_PER_WORKER))
+    begin: float = Time()
+    overload: float = 0
+    print("\nPoisson distribution:\n")
+    for i in range(0, 51):
+        if i > 0 and (i % 5) != 0:
+            print(end="\t")
+        result: float = exp(-prob) * (prob**i) / factorial(i)
+        print("%d -> %.3f" % (i, result), end="")
+        overload += result * (i > PHONE_HOTLINE)
+        if (i + 1) % 5 == 0:
+            print(end="\n")
+    overload = 1 if n > 320 else overload
+    print("\nOverload: %.1f" % (overload * 100) + "%")
+    print("Computation time: %.2f ms" % ((Time() - begin) * 1000))
+
+
+def help() -> None:
+    print("USAGE")
+    print("\t./203hotline [n k | d]", end="\n\n")
+    print("DESCRIPTION")
+    print("\tn\tn value for the computation of C(n, k)")
+    print("\tk\tk value for the computation of C(n, k)")
+    print("\td\taverage duration of calls (in seconds)")
+
+
+def main() -> None:
+    if len(argv) == 3:
+        print("%d-combinations of a set of size %d:\n%d" % (int(argv[2]), int(argv[1]), binomial(int(argv[1]), int(argv[2]))))
+    elif len(argv) == 2:
+        if argv[1] == "-h":
+            help()
+        else:
+            binomial_distribution(int(argv[1]))
+            poisson_distribution(int(argv[1]))
+    else:
+        print("Error: invalid number of arguments")
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as error:
+        print("Error: " + str(error))
